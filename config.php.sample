@@ -1,0 +1,6 @@
+<?php
+
+$config = [];
+$config['vk_code_redirect'] = 'http://example.com/code.php';
+$config['vk_client_id'] = '0123456789';
+$config['vk_client_secret'] = 'AbcDeFgh123456';
