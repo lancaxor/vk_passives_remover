@@ -13,7 +13,7 @@ $storage = new Storage();
 $storage->loadData();
 $token = $storage->getToken();
 
-if(empty($token)) {
+if (empty($token)) {
     echo 'Authorization...';
     $vkAuth = new VkAuthorizer();
     $vkAuth->redirectGetAuth();
