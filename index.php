@@ -14,6 +14,9 @@ $storage->loadData();
 $token = $storage->getToken();
 
 if(empty($token)) {
+    echo 'Authorization...';
     $vkAuth = new VkAuthorizer();
-    $vkAuth->redirectGetCode();
+    $vkAuth->redirectGetAuth();
 }
+
+echo 'Okay, let`s work!';

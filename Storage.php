@@ -13,7 +13,7 @@ class Storage
     private $file;
 
     public function __construct() {
-        $this->filePath = $_SERVER['DOCUMENT_ROOT'] . 'data.dat';
+        $this->filePath = 'data.dat';
         $this->loadData();
     }
 
@@ -44,7 +44,7 @@ class Storage
     }
 
     public function saveData() {
-        $json = json_decode($this->data, true);
+        $json = json_encode($this->data);
         file_put_contents($this->filePath, $json);
         return $this;
     }
