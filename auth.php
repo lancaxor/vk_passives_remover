@@ -6,8 +6,8 @@
  * Time: 21:44
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/VkAuthorizer.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Storage.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/VkAuthorizer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/Storage.php';
 
 // error from VK
 if(isset($_GET['error_description'])) {
