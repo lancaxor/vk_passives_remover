@@ -66,11 +66,11 @@ class VkGroupWorker
         while(!empty($members)) {
             $userIds = array_splice($members, $offset, $limit);
             $processedUsers += count($userIds);
-            echo('members len: ' . count($members));
+//            echo('members len: ' . count($members));
 
-            if($processedUsers % 1000) {
-                echo 'Processed users: ' . $processedUsers . '; Pause 3 secs...';
-                sleep(3);
+            if(($processedUsers % 1000) == 0) {
+//                echo 'Processed users: ' . $processedUsers . '; Pause 1 sec...';
+                sleep(1);
             }
 
             $response = Api::getInstance()->checkRemoveGroupUsers($userIds, $groupId, $this->access_token, $test);

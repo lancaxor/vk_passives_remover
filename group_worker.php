@@ -83,12 +83,12 @@
     $vk = new VkGroupWorker();
     $vk->loadToken();
     $removedUsers = $vk->removeInactiveMembers($groupId, $test);
-    echo '<H2>Removed users:</H2>';
+    echo '<H2>Removed users (' . count($removedUsers) . ')</H2>';
     if(!empty($removedUsers) && is_array($removedUsers)):
         echo '<ol>';
         foreach($removedUsers as $user):
             echo <<<HTML
-    <li><a href="http://vk.com/id{$user->uid}">{$user->uid}</a>: {$user->first_name} {$user->last_name} <img src="{$user->photo_50}" alt="User photo"/></li>
+    <li><a href="http://vk.com/id{$user->uid}">{$user->uid}</a>: {$user->first_name} {$user->last_name} <img src="{$user->photo_50}" alt="User photo" style="display:inline;vertical-align: middle"/></li>
 HTML;
         endforeach;
         echo '</ol>';
