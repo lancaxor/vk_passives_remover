@@ -34,7 +34,7 @@ class Api
      * @param null $filter      string  friends|unsure
      * @param string $version   string  current: 5.63
      *
-     * @return object
+     * @return object|false
      *
      * @link https://vk.com/dev/groups.getMembers
      */
@@ -49,6 +49,75 @@ class Api
         ];
 
         $url = $this->getMethodUrl('groups.getMembers');
+
+        // use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === FALSE) {
+            return false;
+        }
+
+        return json_decode($result);
+    }
+
+    /**
+     * @param $groupId
+     * @return bool|mixed
+     */
+    public function getGroupById($groupId) {
+
+        if(is_array($groupId)) {
+            $groupId = implode(',', $groupId);
+            $groupIdField = 'group_ids';
+        } else {
+            $groupIdField = 'group_id';
+        }
+        $data = [
+            $groupIdField   => $groupId,
+        ];
+
+        $url = $this->getMethodUrl('groups.getById');
+
+        // use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === FALSE) {
+            return false;
+        }
+
+        return json_decode($result);
+    }
+
+    /**
+     * @param $userIds array
+     * @param $groupId string
+     * @param $access_token string
+     * @param $test integer Either 1 or 0
+     * @return bool|object
+     */
+    public function checkRemoveGroupUsers($userIds, $groupId, $access_token, $test = 0) {
+        $data = [
+            'user_ids'      => implode(',', $userIds),
+            'group_id'      => $groupId,
+            'access_token'  => $access_token,
+            'test'          => $test
+        ];
+
+        $url = $this->getMethodUrl('execute.checkRemoveGroupUsers');
 
         // use key 'http' even if you send the request to https://...
         $options = array(

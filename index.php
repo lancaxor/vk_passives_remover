@@ -20,4 +20,5 @@ if (empty($token)) {
     return;
 }
 
-echo 'Okay, let`s work!';
+echo 'Okay, let`s work!<br/>';
+echo '<a href="/group_worker.php">Inactive users removal tool</a><br/>';
